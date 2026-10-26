@@ -1,0 +1,127 @@
+/* ============================================================
+   Estilos del portafolio. Para cambiar el color principal,
+   modifica --acento (modo claro) y --acento en el bloque oscuro.
+   ============================================================ */
+:root {
+  --fondo: #f7f7f4;
+  --superficie: #ffffff;
+  --texto: #1c1e21;
+  --suave: #5d636b;
+  --borde: #e2e2dc;
+  --acento: #0e7c86;
+  --acento-texto: #ffffff;
+  --sombra: 0 1px 2px rgba(0,0,0,.05), 0 4px 16px rgba(0,0,0,.05);
+  --radio: 14px;
+  --ancho: 1040px;
+}
+/* Modo oscuro: se activa con tema: "oscuro" en _config.yml,
+   con el botón ☀/☾, o con "automatico" si el equipo está en oscuro */
+:root[data-theme="oscuro"] {
+  --fondo: #121417;
+  --superficie: #1b1e22;
+  --texto: #e8eaed;
+  --suave: #a0a7b0;
+  --borde: #2c3036;
+  --acento: #3cc6d0;
+  --acento-texto: #0c1214;
+  --sombra: none;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="automatico"] {
+    --fondo: #121417;
+    --superficie: #1b1e22;
+    --texto: #e8eaed;
+    --suave: #a0a7b0;
+    --borde: #2c3036;
+    --acento: #3cc6d0;
+    --acento-texto: #0c1214;
+    --sombra: none;
+    color-scheme: dark;
+  }
+}
+.boton-tema { background: none; border: 1px solid var(--borde); color: var(--suave); border-radius: 999px; width: 34px; height: 34px; cursor: pointer; display: inline-grid; place-items: center; padding: 0; }
+.boton-tema:hover { color: var(--acento); border-color: var(--acento); }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font: 17px/1.65 "Inter", system-ui, sans-serif;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--acento); }
+h1, h2, h3 { font-family: "Space Grotesk", system-ui, sans-serif; line-height: 1.2; }
+
+.contenedor { max-width: var(--ancho); margin: 0 auto; padding: 0 16px; }
+
+/* Barra superior */
+.barra { border-bottom: 1px solid var(--borde); background: var(--superficie); position: sticky; top: 0; z-index: 10; }
+.barra-interior { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 60px; flex-wrap: wrap; }
+.marca { font-family: "Space Grotesk", sans-serif; font-weight: 700; color: var(--texto); text-decoration: none; font-size: 1.1rem; }
+.barra nav { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+.barra nav a { color: var(--suave); text-decoration: none; font-size: .95rem; }
+.barra nav a:hover { color: var(--acento); }
+
+/* Portada */
+.portada-inicio { padding: 72px 0 48px; }
+.saludo { color: var(--suave); margin: 0; font-family: "JetBrains Mono", monospace; font-size: .9rem; }
+.portada-inicio h1 { font-size: clamp(2.2rem, 7vw, 3.6rem); margin: 4px 0 8px; }
+.lema { font-size: 1.15rem; color: var(--suave); max-width: 640px; margin: 0; }
+
+.botones { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+.boton { display: inline-block; background: var(--acento); color: var(--acento-texto); padding: 10px 18px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: .95rem; }
+.boton-secundario { background: transparent; color: var(--texto); border: 1px solid var(--borde); }
+
+/* Secciones */
+.seccion { padding: 40px 16px; }
+.seccion h2 { font-size: 1.7rem; margin: 0 0 20px; }
+
+/* Rejilla de proyectos */
+.rejilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.tarjeta { background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio); overflow: hidden; text-decoration: none; color: inherit; box-shadow: var(--sombra); transition: transform .15s ease, border-color .15s ease; display: flex; flex-direction: column; }
+.tarjeta:hover { transform: translateY(-3px); border-color: var(--acento); }
+.tarjeta img, .sin-imagen { aspect-ratio: 16 / 10; width: 100%; object-fit: cover; }
+.sin-imagen { display: grid; place-items: center; font-size: 3rem; color: var(--suave); background: var(--borde); }
+.tarjeta-texto { padding: 16px 18px 20px; }
+.tarjeta h3 { margin: 4px 0 6px; font-size: 1.2rem; }
+.tarjeta p { margin: 0; color: var(--suave); font-size: .95rem; }
+
+.chips { list-style: none; padding: 0; margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.chips li { font-family: "JetBrains Mono", monospace; font-size: .75rem; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--borde); color: var(--suave); }
+.chips-grandes li { font-size: .85rem; padding: 5px 12px; }
+
+.etiqueta-estado { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--acento); margin: 0; }
+.estado-en-progreso { color: #c07a00; }
+
+.sobre-mi { max-width: 720px; }
+.enlaces { list-style: none; padding: 0; display: flex; gap: 18px; flex-wrap: wrap; }
+
+/* Página de proyecto */
+.proyecto { max-width: 820px; padding-top: 32px; padding-bottom: 48px; }
+.volver { text-decoration: none; font-size: .9rem; }
+.proyecto-cabecera h1 { font-size: clamp(1.9rem, 6vw, 2.8rem); margin: 6px 0 8px; }
+.resumen { font-size: 1.15rem; color: var(--suave); margin: 0; }
+.datos { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: .95rem; }
+.datos span { display: block; font-family: "JetBrains Mono", monospace; font-size: .72rem; text-transform: uppercase; color: var(--suave); letter-spacing: .06em; }
+.portada { border-radius: var(--radio); margin: 28px 0 0; border: 1px solid var(--borde); }
+.video { position: relative; aspect-ratio: 16 / 9; margin: 28px 0 0; border-radius: var(--radio); overflow: hidden; background: #000; }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+.contenido { margin-top: 32px; }
+.contenido h2 { font-size: 1.5rem; margin-top: 2.2em; padding-top: .6em; border-top: 1px solid var(--borde); }
+.contenido h3 { font-size: 1.15rem; margin-top: 1.6em; }
+.contenido img { border-radius: 10px; margin: 16px 0; border: 1px solid var(--borde); }
+.contenido em { color: var(--suave); }
+.contenido table { border-collapse: collapse; width: 100%; font-size: .95rem; display: block; overflow-x: auto; }
+.contenido th, .contenido td { border: 1px solid var(--borde); padding: 8px 10px; text-align: left; }
+.contenido th { background: var(--superficie); }
+.contenido code { font-family: "JetBrains Mono", monospace; font-size: .88em; background: var(--superficie); border: 1px solid var(--borde); padding: 1px 5px; border-radius: 5px; }
+.contenido pre { background: var(--superficie); border: 1px solid var(--borde); border-radius: 10px; padding: 14px; overflow-x: auto; }
+.contenido pre code { border: 0; padding: 0; background: none; }
+.contenido blockquote { margin: 1.4em 0; padding: 10px 16px; border-left: 4px solid var(--acento); background: var(--superficie); border-radius: 0 10px 10px 0; }
+.contenido blockquote p { margin: .3em 0; }
+
+.pie { border-top: 1px solid var(--borde); margin-top: 40px; padding: 24px 0; color: var(--suave); font-size: .9rem; }

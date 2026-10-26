@@ -1,0 +1,68 @@
+# ============================================================
+#  CONFIGURACIÓN DEL PORTAFOLIO
+#  Edita solo los valores entre comillas. No cambies los nombres
+#  antes de los dos puntos (:).
+#  Después de guardar, el sitio tarda 1 o 2 minutos en actualizarse.
+# ============================================================
+
+# Tu nombre, tal como quieres que aparezca en el sitio
+nombre: "Tu Nombre"
+
+# Una línea que te describa
+lema: "Futura ingeniera mecatrónica · Hago robots, circuitos y cosas que se mueven"
+
+# Párrafo corto para la sección "Sobre mí"
+sobre_mi: >-
+  Me apasiona entender cómo funcionan las cosas y construir las mías propias.
+  Trabajo con Arduino, Raspberry Pi, servomotores, sensores e impresión 3D.
+  Aquí documento mis proyectos: la idea, el diseño, los problemas que encontré
+  y cómo los resolví.
+
+# Tus enlaces públicos (deja vacío "" si no tienes alguno)
+github: "tu-usuario"          # solo el usuario, sin https://github.com/
+youtube: ""                   # enlace completo a tu canal
+linkedin: ""                  # enlace completo a tu perfil
+correo: ""                    # opcional; mejor un correo solo para el portafolio
+
+# Tema de colores al abrir el sitio:
+#   "oscuro"     → siempre oscuro
+#   "claro"      → siempre claro
+#   "automatico" → según la configuración del equipo del visitante
+# El visitante igual puede cambiarlo con el botón de tema (el círculo mitad lleno) de arriba.
+tema: "oscuro"
+
+# Habilidades que aparecen en la página principal
+habilidades:
+  - Arduino (C/C++)
+  - Raspberry Pi (Python)
+  - Soldadura
+  - Servomotores y drivers
+  - Diseño 3D (Tinkercad / Fusion 360)
+
+# ---- Datos técnicos: normalmente no hace falta tocarlos ----
+title: "Portafolio"
+description: "Portafolio de proyectos de mecatrónica"
+lang: es
+url: ""          # se llena solo con GitHub Pages
+baseurl: ""      # déjalo vacío si el repositorio se llama usuario.github.io
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+collections:
+  proyectos:
+    output: true
+    permalink: /proyectos/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: proyectos
+    values:
+      layout: proyecto
+
+exclude:
+  - INSTRUCCIONES.md
+  - README.md
+  - PLANTILLA-PROYECTO.md

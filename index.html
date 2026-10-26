@@ -1,0 +1,60 @@
+---
+layout: default
+---
+<section class="portada-inicio">
+  <div class="contenedor">
+    <p class="saludo">Hola, soy</p>
+    <h1>{{ site.nombre }}</h1>
+    <p class="lema">{{ site.lema }}</p>
+    <p class="botones">
+      <a class="boton" href="#proyectos">Ver proyectos</a>
+      {% if site.github != "" %}<a class="boton boton-secundario" href="https://github.com/{{ site.github }}">GitHub</a>{% endif %}
+    </p>
+  </div>
+</section>
+
+<section id="proyectos" class="contenedor seccion">
+  <h2>Proyectos</h2>
+  {% assign lista = site.proyectos | sort: "fecha" | reverse %}
+  {% if lista.size == 0 %}
+    <p>Pronto habrá proyectos aquí.</p>
+  {% else %}
+  <div class="rejilla">
+    {% for p in lista %}
+    <a class="tarjeta" href="{{ p.url | relative_url }}">
+      {% if p.imagen %}
+        <img src="{{ p.imagen | relative_url }}" alt="" loading="lazy">
+      {% else %}
+        <div class="sin-imagen" aria-hidden="true">⚙</div>
+      {% endif %}
+      <div class="tarjeta-texto">
+        <p class="etiqueta-estado estado-{{ p.estado | default: 'terminado' | slugify }}">{{ p.estado | default: "Terminado" }}</p>
+        <h3>{{ p.titulo }}</h3>
+        <p>{{ p.resumen }}</p>
+        {% if p.tecnologias %}
+        <ul class="chips">
+          {% for t in p.tecnologias limit: 4 %}<li>{{ t }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+
+<section id="sobre-mi" class="contenedor seccion">
+  <h2>Sobre mí</h2>
+  <p class="sobre-mi">{{ site.sobre_mi }}</p>
+  {% if site.habilidades %}
+  <ul class="chips chips-grandes">
+    {% for h in site.habilidades %}<li>{{ h }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+  <ul class="enlaces">
+    {% if site.github != "" %}<li><a href="https://github.com/{{ site.github }}">GitHub</a></li>{% endif %}
+    {% if site.youtube != "" %}<li><a href="{{ site.youtube }}">YouTube</a></li>{% endif %}
+    {% if site.linkedin != "" %}<li><a href="{{ site.linkedin }}">LinkedIn</a></li>{% endif %}
+    {% if site.correo != "" %}<li><a href="mailto:{{ site.correo }}">Correo</a></li>{% endif %}
+  </ul>
+</section>

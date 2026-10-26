@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'es' }}" data-theme="{{ site.tema | default: 'oscuro' }}">
+<head>
+  <script>
+    // Respeta la elección del visitante (botón ☀/☾) si ya cambió el tema
+    try { var t = localStorage.getItem('tema'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.titulo %}{{ page.titulo }} · {% endif %}{{ site.nombre }}</title>
+  <meta name="description" content="{{ page.resumen | default: site.lema | escape }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  <header class="barra">
+    <div class="contenedor barra-interior">
+      <a class="marca" href="{{ '/' | relative_url }}">{{ site.nombre }}</a>
+      <nav>
+        <a href="{{ '/' | relative_url }}#proyectos">Proyectos</a>
+        <a href="{{ '/' | relative_url }}#sobre-mi">Sobre mí</a>
+        {% if site.github != "" %}<a href="https://github.com/{{ site.github }}">GitHub</a>{% endif %}
+        <button class="boton-tema" type="button" aria-label="Cambiar entre modo claro y oscuro" onclick="cambiarTema()"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
+      </nav>
+      <script>
+        function cambiarTema() {
+          var r = document.documentElement, t = r.dataset.theme;
+          var oscuro = t === 'oscuro' || (t === 'automatico' && matchMedia('(prefers-color-scheme: dark)').matches);
+          r.dataset.theme = oscuro ? 'claro' : 'oscuro';
+          try { localStorage.setItem('tema', r.dataset.theme); } catch (e) {}
+        }
+      </script>
+    </div>
+  </header>
+
+  <main>
+    {{ content }}
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <p>© {{ 'now' | date: "%Y" }} {{ site.nombre }} · Hecho con GitHub Pages</p>
+    </div>
+  </footer>
+</body>
+</html>

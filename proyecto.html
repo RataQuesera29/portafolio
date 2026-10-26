@@ -1,0 +1,38 @@
+---
+layout: default
+---
+<article class="contenedor proyecto">
+  <a class="volver" href="{{ '/' | relative_url }}#proyectos">← Todos los proyectos</a>
+
+  <header class="proyecto-cabecera">
+    <p class="etiqueta-estado estado-{{ page.estado | default: 'terminado' | slugify }}">{{ page.estado | default: "Terminado" }}</p>
+    <h1>{{ page.titulo }}</h1>
+    {% if page.resumen %}<p class="resumen">{{ page.resumen }}</p>{% endif %}
+    <ul class="datos">
+      {% if page.fecha %}<li><span>Fecha</span>{{ page.fecha | date: "%m/%Y" }}</li>{% endif %}
+      {% if page.duracion %}<li><span>Duración</span>{{ page.duracion }}</li>{% endif %}
+      {% if page.tecnologias %}<li><span>Tecnologías</span>{{ page.tecnologias | join: " · " }}</li>{% endif %}
+    </ul>
+    {% assign enlaces = page.codigo | append: page.video %}
+    {% if enlaces != "" %}
+    <p class="botones">
+      {% if page.codigo and page.codigo != "" %}<a class="boton" href="{{ page.codigo }}">Ver el código</a>{% endif %}
+      {% if page.video and page.video != "" %}<a class="boton boton-secundario" href="https://www.youtube.com/watch?v={{ page.video }}">Ver en YouTube</a>{% endif %}
+    </p>
+    {% endif %}
+  </header>
+
+  {% if page.imagen and page.imagen != "" %}
+  <img class="portada" src="{{ page.imagen | relative_url }}" alt="{{ page.titulo }}">
+  {% endif %}
+
+  {% if page.video and page.video != "" %}
+  <div class="video">
+    <iframe src="https://www.youtube-nocookie.com/embed/{{ page.video }}" title="Video de {{ page.titulo }}" allowfullscreen loading="lazy"></iframe>
+  </div>
+  {% endif %}
+
+  <div class="contenido">
+    {{ content }}
+  </div>
+</article>
